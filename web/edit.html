@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+    <head> 
+        <title>WebDev HackBox</title>
+        <link id="bespin_base" href="bespin">
+        <link rel="stylesheet" type="text/css" href="css/edit.css">
+    </head> 
+    <body>
+        <div id="doc">
+            <form>
+                <fieldset>
+                    <legend>URL</legend>
+                    <input type="text" id="url" value="http://google.com">
+                </fieldset>
+                <fieldset>
+                    <legend>SETTINGS</legend>
+                    <ul>
+                        <li><input type="checkbox" id="absolute" checked><label for="absolute">Absolute links</label></li>
+                        <li><input type="checkbox" id="recursive" checked><label for="recursive">Recursive Iframes</label></li>
+                    </ul>
+                </fieldset>
+                <fieldset class="block">
+                    <legend>BLOCK</legend>
+                    <textarea><style>html,body{background-color:orange !important;}hack{text-align:center;}</style></textarea>
+                    <fieldset>
+                        <legend>Location</legend>
+                        <ul>
+                            <li><input type= "radio" name="block0-location" class="location" id="block0-head" value="head" checked><label for="block0-head">head</label></li>
+                            <li><input type= "radio" name="block0-location" class="location" id="block0-body" value="body"><label for="block0-body">body</label></li>
+                            <li><input type= "radio" name="block0-location" class="location" id="block0-custom" value="custom">
+                                <label for="block0-custom">custom <input type="text" class="custom"></label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Order</legend>
+                        <ul>
+                            <li><input type="radio" name="block0-order" class="order" id="block0-prepend" value="prepend"><label for="block0-prepend">first child</label></li>
+                            <li><input type="radio" name="block0-order" class="order" id="block0-append" value="append" checked><label for="block0-append">last child</label></li>
+                        </ul>
+                    </fieldset>
+                </fieldset>
+                <fieldset class="block">
+                    <legend>BLOCK</legend>
+                    <textarea><script>var d=document,l=d.getElementById('logo'),e=d.createElement('div');e.innerHTML='<h1 class="hack">FOOBAR</h1>';l.parentNode.insertBefore(e,l);</script></textarea>
+                    <fieldset>
+                        <legend>Location</legend>
+                        <ul>
+                            <li><input type= "radio" name="block1-location" class="location" id="block1-head" value="head"><label for="block1-head">head</label></li>
+                            <li><input type= "radio" name="block1-location" class="location" id="block1-body" value="body" checked><label for="block1-body">body</label></li>
+                            <li><input type= "radio" name="block1-location" class="location" id="block1-custom" value="custom">
+                                <label for="block1-custom">custom <input type="text" class="custom"></label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Order</legend>
+                        <ul>
+                            <li><input type="radio" name="block1-order" class="order" id="block1-prepend" value="prepend"><label for="block1-prepend">first child</label></li>
+                            <li><input type="radio" name="block1-order" class="order" id="block1-append" value="append" checked><label for="block1-append">last child</label></li>
+                        </ul>
+                    </fieldset>
+                </fieldset>
+                <fieldset class="replace">
+                    <legend>REPLACE</legend>
+                    <label for="replace0-from">From</label><textarea id="replace0-from" class="replace-from">Lucky</textarea>
+                    <ul>
+                        <li><input type="radio" name="replace0-search-type" class="search-type" id="replace0-search-string" value="string" checked><label for="replace0-search-string">String</label></li>
+                        <li><input type="radio" name="replace0-search-type" class="search-type" id="replace0-search-regexp" value="regexp">
+                            <label for="replace0-search-regexp">RegExp. flags: <input type="text" class="flags"></label>
+                        </li>
+                    </ul>
+                    <label for="replace0-to">To</label><textarea id="replace0-to" class="replace-to">Baaad</textarea>
+                    <ul>
+                        <li><input type="radio" name="replace0-replace-type" class="replace-type" id="replace0-replace-string" value="string" checked><label for="replace0-replace-string">String</label></li>
+                        <li><input type="radio" name="replace0-replace-type" class="replace-type" id="replace0-replace-function" value="function">
+                            <label for="replace0-replace-function">Function. args: <input type="text" class="args"></label>
+                        </li>
+                    </ul>
+                </fieldset>
+                <button id="test-btn">Test</button>
+                <button id="height-btn">Adjust Height</button>
+            </form>
+            <div id="output">
+                <ul>
+                    <li><a href="#changed-view">changed view</a></li>
+                    <li><a href="#changed-code">changed code</a></li>
+                    <li><a href="#original-view">original view</a></li>
+                    <li><a href="#original-code">original code</a></li>
+                </ul>
+                <div>
+                    <div id="changed-view"></div>
+                    <div id="changed-code"><textarea id="changed-code-area"></textarea></div>
+                    <div id="original-view"></div>
+                    <div id="original-code"><textarea id="original-code-area"></textarea></div>
+                </div>
+            </div>
+        </div>
+        <script src="http://yui.yahooapis.com/3.1.1/build/yui/yui-min.js"></script> 
+        <script src="js/wdhb.js"></script> 
+        <script src="js/edit.js"></script> 
+        <script src="bespin/BespinEmbedded.js"></script> 
+    </body> 
+</html>
