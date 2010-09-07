@@ -1,3 +1,6 @@
 .wdhb-frame {width:100%; border:1px solid black;}
-textarea, #url {width:100%;}
+textarea, #url {width:99%;}
 #changed-code-area, #original-code-area {height:600px;}
+#tabs {position:fixed; width:100%; height:2em; background-color:#fff; border-bottom:1px solid #000;}
+#containers {padding-top:2em;}
+.hidden {visibility:hidden;}

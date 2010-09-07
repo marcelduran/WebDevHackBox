@@ -1,30 +1,41 @@
-YUI().use('node', 'event', 'event-delegate', 'tabview', 'webdev-hackbox', function (Y) {
+YUI().use('node', 'event', 'event-delegate', 'tabview', 'gallery-fiddler', function (Y) {
     var heightTimers,
-        wdhb = Y.namespace('WDHB'),
 
         // elements
         pageUrl = Y.one('#url'),
         absolute = Y.one('#absolute'),
         recursive = Y.one('#recursive'),
+        showOriginalPage = Y.one('#show-original-page'),
+        showOriginalCode = Y.one('#show-original-code'),
+        showChangedCode = Y.one('#show-changed-code'),
         outputTabs = new Y.TabView({
-            srcNode: '#output'
+            srcNode: '#main-tabs'
         }),
+
+        // fill code
+        fillCode = function (container, html) {
+            container.set('value', html);
+        },
 
         // test changes on url
         test = function () {
-            var config = {
-                    url: pageUrl.get('value'),
+            var url = pageUrl.get('value'),
+                config = {
                     absolute: absolute.get('checked'),
                     recursive: recursive.get('checked'),
-                    container: {
-                        changedView: Y.one('#changed-view'),
-                        changedCode: Y.one('#changed-code-area'),
-                        originalView: Y.one('#original-view'),
-                        originalCode: Y.one('#original-code-area')
+                    render: {
+                        changed: Y.one('#changed-page'),
                     },
                     blocks: [],
                     replaces: []
-                };
+                },
+                originalIframe = Y.one('#original-page iframe');
+
+            if (showOriginalPage.get('checked')) { 
+                config.render.original = Y.one('#original-page');
+            } else if (originalIframe) {
+                originalIframe.remove(true);
+            }
 
             // get blocks of changes
             Y.all('.block').each(function (block) {
@@ -58,18 +69,31 @@ YUI().use('node', 'event', 'event-delegate', 'tabview', 'webdev-hackbox', functi
             if (!config.replaces.length) {
                 delete config.replaces;
             }
+           
+            // show codes
+            config.on = {};
+            if (showOriginalCode.get('checked')) {
+                config.on.fetch = Y.bind(fillCode, this, Y.one('#original-code-area'));
+            } else {
+                Y.one('#original-code-area').set('value', '');
+            }
+            if (showChangedCode.get('checked')) {
+                config.on.change = Y.bind(fillCode, this, Y.one('#changed-code-area'));
+            } else {
+                Y.one('#changed-code-area').set('value', '');
+            }
 
             // request url and changes
-            wdhb.exec(config);
+            Y.fiddler(url, config);
 
             // start auto height timers
             if (!heightTimers) {
                 heightTimers = {
                     changed: Y.later(3000, null, function () {
-                        wdhb.setHeight(Y.one('#changed-view .wdhb-frame'));
+                        Y.fiddler.setHeight(Y.one('#changed-page .wdhb-frame'));
                     }, null, true),
                     original: Y.later(3000, null, function () {
-                        wdhb.setHeight(Y.one('#original-view .wdhb-frame'));
+                        Y.fiddler.setHeight(Y.one('#original-page .wdhb-frame'));
                     }, null, true)
                }; 
             }
@@ -85,8 +109,5 @@ YUI().use('node', 'event', 'event-delegate', 'tabview', 'webdev-hackbox', functi
 
     // tabview
     outputTabs.render();
-
-    Y.one('#height-btn').on('click', function (e) {
-        bespin.useBespin('changed-code-area', {syntax: 'html'});
-    });
+    Y.one('#tabs').removeClass('hidden');
 });
