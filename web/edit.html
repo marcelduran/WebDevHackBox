@@ -3,7 +3,7 @@
 <html> 
     <head> 
         <title>Web Fiddler</title>
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.1.2/build/cssreset/reset-min.css&3.1.2/build/cssfonts/fonts-min.css&3.1.2/build/cssbase/base-min.css">
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.2.0/build/cssreset/reset-min.css&3.2.0/build/cssfonts/fonts-min.css&3.2.0/build/cssbase/base-min.css">
         <link rel="stylesheet" type="text/css" href="css/edit.css">
     </head> 
     <body>
@@ -20,12 +20,14 @@
                     <form>
                         <fieldset>
                             <legend>URL</legend>
-                            <input type="text" id="url" value="http://google.com">
+                            <input type="text" id="url" value="http://javascriptrules.com">
                         </fieldset>
                         <fieldset>
                             <legend>SETTINGS</legend>
                             <ul>
-                                <li><input type="checkbox" id="absolute" checked><label for="absolute">Absolute links</label></li>
+                                <li><input type="checkbox" id="absoluteAttr" checked><label for="absoluteAttr">Absolute links for attributes</label></li>
+                                <li><input type="checkbox" id="absoluteStyle" checked><label for="absoluteStyle">Absolute links for styles</label></li>
+                                <li><input type="checkbox" id="absoluteScript" checked><label for="absoluteScript">Absolute links for scripts</label></li>
                                 <li><input type="checkbox" id="recursive" checked><label for="recursive">Recursive Iframes</label></li>
                             </ul>
                         </fieldset>
@@ -52,7 +54,7 @@
                         </fieldset>
                         <fieldset class="block">
                             <legend>BLOCK</legend>
-                            <textarea><script>var d=document,l=d.getElementById('logo'),e=d.createElement('div');e.innerHTML='<h1 class="hack">FOOBAR</h1>';l.parentNode.insertBefore(e,l);</script></textarea>
+                            <textarea><script>var d=document,l=d.getElementById('headertitle'),e=d.createElement('div');e.innerHTML='<h1 class="hack">FOOBAR</h1>';l.parentNode.appendChild(e);</script></textarea>
                             <fieldset>
                                 <legend>Location</legend>
                                 <ul>
@@ -105,8 +107,10 @@
                 <div id="original-code"><textarea id="original-code-area"></textarea></div>
             </div>
         </div>
-        <script src="http://yui.yahooapis.com/3.1.1/build/yui/yui-min.js"></script> 
+        <script src="http://yui.yahooapis.com/combo?3.2.0/build/yui/yui-min.js&3.2.0/build/loader/loader-min.js"></script> 
         <script src="js/gallery-fiddler.js"></script> 
         <script src="js/edit.js"></script> 
+        <script src="js/beautify.js"></script> 
+        <script src="js/beautify-html.js"></script> 
     </body> 
 </html>

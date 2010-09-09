@@ -3,7 +3,7 @@ YUI().use('node', 'event', 'event-delegate', 'tabview', 'gallery-fiddler', funct
 
         // elements
         pageUrl = Y.one('#url'),
-        absolute = Y.one('#absolute'),
+        absoluteAttr = Y.one('#absoluteAttr'),
         recursive = Y.one('#recursive'),
         showOriginalPage = Y.one('#show-original-page'),
         showOriginalCode = Y.one('#show-original-code'),
@@ -14,14 +14,15 @@ YUI().use('node', 'event', 'event-delegate', 'tabview', 'gallery-fiddler', funct
 
         // fill code
         fillCode = function (container, html) {
-            container.set('value', html);
+            // TODO: set beautifier as ption w/ auto-beautifier
+            container.set('value', style_html(html));
         },
 
         // test changes on url
         test = function () {
             var url = pageUrl.get('value'),
                 config = {
-                    absolute: absolute.get('checked'),
+                    absolute: absoluteAttr.get('checked'),
                     recursive: recursive.get('checked'),
                     render: {
                         changed: Y.one('#changed-page'),
